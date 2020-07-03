@@ -180,6 +180,7 @@ const NS_PER_SEC = 1e9;
 const MICROS_PER_SEC = 1e6;
 async function benchmark() {
   const delay = util.promisify(setTimeout);
+  const stats = (new Array(20)).fill(0);
   while (true) {
     console.log('---------------------------- BEGIN ITERATION ---------------------------------');
     const product = makeNewProduct();
@@ -190,7 +191,7 @@ async function benchmark() {
     await delay(200);
 
     const time1 = process.hrtime();
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 50000; i++) {
       maybeFasterParse(productJson);
     }
     const diff1 = process.hrtime(time1);
@@ -199,7 +200,7 @@ async function benchmark() {
     await delay(500);
 
     const time2 = process.hrtime();
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 50000; i++) {
       JSON.parse(productJson);
     }
     const diff2 = process.hrtime(time2);
@@ -208,6 +209,12 @@ async function benchmark() {
     const change = (diff2[0] - diff1[0]) * MICROS_PER_SEC + Math.round((diff2[1] - diff1[1]) / 1000)
     console.log(`                Difference of latter minus former is ${change} microseconds`);
 
+    stats.push(change);
+    stats.shift();
+    const avg = stats.reduce((v1, v2) => v1 + v2, 0) / stats.length;
+    console.log("                Last 20 differences: ")
+    console.log(stats.join());
+    console.log(`                Average of the last 20 is ${avg} microseconds`);
     await delay(200);
   }
 }
