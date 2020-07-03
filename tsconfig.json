@@ -1,0 +1,16 @@
+{
+    "include": ["src/**/*.ts"],
+    "compileOnSave": true,
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "lib",
+        "target": "ES2018",
+        "module": "CommonJS",
+        "strict": true,
+        "declaration": true,
+    //  "noUnusedLocals": true,
+    //  "noUnusedParameters": true,
+    //  "noImplicitReturns": true,
+    //  "noFallthroughCasesInSwitch": true,
+    },
+}

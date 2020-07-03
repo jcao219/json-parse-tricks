@@ -1,0 +1,29 @@
+{
+  "name": "schema-json-parse",
+  "version": "0.0.1",
+  "description": "A fast JSON.parse implementation that leverages JSON Schema",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "tap",
+    "run": "npm run build && node lib/index.js",
+    "build": "tsc"
+  },
+  "keywords": [
+    "json",
+    "fast"
+  ],
+  "author": "Jimmy Cao",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "@types/tap": "^14.10.0",
+    "ajv": "^6.12.2",
+    "prettier": "^2.0.5",
+    "tap": "^14.10.7",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@types/json-schema-traverse": "^0.4.0",
+    "json-schema-traverse": "^0.4.1"
+  }
+}
